@@ -1,18 +1,23 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import TodoList from './TodoList';
-import AddTaskForm from './AddTaskForm';
-import EditTaskForm from './EditTaskForm';
+import React, { useState } from 'react';
+import Header from './Components/Header';
+import TodoApp from './Components/TodoList';
+import './App.css';
+import { LanguageProvider } from './Components/LanguageContext';
 
 function App() {
+  const [language, setLanguage] = useState('en');
+
+  const changeLanguage = (lang) => {
+    setLanguage(lang);
+  };
+
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact component={TodoList} />
-        <Route path="/add" component={AddTaskForm} />
-        <Route path="/edit/:taskId" component={EditTaskForm} />
-      </Switch>
-    </Router>
+    <LanguageProvider value={{ language }}>
+      <div className="Header">
+        <Header changeLanguage={changeLanguage} />
+        <TodoApp language={language} />
+      </div>
+    </LanguageProvider>
   );
 }
 
