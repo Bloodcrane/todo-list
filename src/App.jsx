@@ -11,7 +11,6 @@ import { LanguageProvider } from './Components/LanguageContext';
 function App() {
   const [language, setLanguage] = useState('en');
   const [theme, setTheme] = useState(() => {
-    // Retrieve theme preference from localStorage or default to 'light'
     return localStorage.getItem('theme') || 'light';
   });
 
@@ -20,7 +19,6 @@ function App() {
   }, [theme]);
 
   useEffect(() => {
-    // Apply theme preference from localStorage
     document.body.className = theme;
   }, [theme]);
 
@@ -31,7 +29,7 @@ function App() {
   const toggleTheme = () => {
     setTheme((prevTheme) => {
       const newTheme = prevTheme === 'light' ? 'dark' : 'light';
-      localStorage.setItem('theme', newTheme); // Update localStorage
+      localStorage.setItem('theme', newTheme);
       return newTheme;
     });
   };
